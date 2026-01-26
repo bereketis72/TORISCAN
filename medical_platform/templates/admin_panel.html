@@ -1,0 +1,138 @@
+{% extends "ana_taslak.html" %}
+
+{% block title %}Admin Panel{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+        <h1>
+            <i class="fas fa-user-shield"></i> Admin Kontrol Paneli
+        </h1>
+        <a href="{{ url_for('dashboard') }}" class="btn btn-primary">
+            <i class="fas fa-chart-line"></i> Analiz Paneline Git
+        </a>
+    </div>
+
+    <!-- İstatistikler -->
+    <div class="row mb-4">
+        <div class="col-md-3">
+            <div class="card text-white bg-primary mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        <i class="fas fa-users"></i> Toplam Kullanıcılar
+                    </h5>
+                    <h2>{{ total_users }}</h2>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card text-white bg-success mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        <i class="fas fa-clipboard-list"></i> Toplam Analizler
+                    </h5>
+                    <h2>{{ total_analyses }}</h2>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card text-white bg-info mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        <i class="fas fa-layer-group"></i> Batch Analizler
+                    </h5>
+                    <h2>{{ total_batches }}</h2>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card text-white bg-warning mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        <i class="fas fa-chart-bar"></i> En Popüler
+                    </h5>
+                    <p class="mb-0">Kemik: {{ bone_count }}</p>
+                    <p class="mb-0">Göz: {{ eye_count }}</p>
+                    <p class="mb-0">Akciğer: {{ lung_count }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <!-- Son Kullanıcılar -->
+        <div class="col-md-6">
+            <div class="card mb-4">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0">
+                        <i class="fas fa-users"></i> Son Kullanıcılar
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-sm table-hover">
+                            <thead>
+                                <tr>
+                                    <th>TC Kimlik</th>
+                                    <th>Ad Soyad</th>
+                                    <th>Kayıt Tarihi</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for user in recent_users %}
+                                <tr>
+                                    <td>{{ user.tc_kimlik }}</td>
+                                    <td>{{ user.ad }} {{ user.soyad }}</td>
+                                    <td>{{ user.olusturma_tarihi|datetime_tr }}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    <a href="{{ url_for('admin_users') }}" class="btn btn-primary btn-sm">
+                        Tüm Kullanıcılar <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Son Analizler -->
+        <div class="col-md-6">
+            <div class="card mb-4">
+                <div class="card-header bg-success text-white">
+                    <h5 class="mb-0">
+                        <i class="fas fa-clipboard-list"></i> Son Analizler
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-sm table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Model</th>
+                                    <th>Tanı</th>
+                                    <th>Güven</th>
+                                    <th>Tarih</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for analysis in recent_analyses %}
+                                <tr>
+                                    <td>{{ analysis.get_model_name_tr() }}</td>
+                                    <td>{{ analysis.tani_sonucu }}</td>
+                                    <td>{{ "%.1f"|format(analysis.guven_orani) }}%</td>
+                                    <td>{{ analysis.olusturma_tarihi|datetime_tr }}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    <a href="{{ url_for('admin_analyses') }}" class="btn btn-success btn-sm">
+                        Tüm Analizler <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

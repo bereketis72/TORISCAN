@@ -1,0 +1,117 @@
+# English translations - COMPLETE VERSION
+msgid ""
+msgstr ""
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+
+msgid "Profilim"
+msgstr "My Profile"
+
+msgid "Şifre Değiştir"
+msgstr "Change Password"
+
+msgid "Hesabı Sil"
+msgstr "Delete Account"
+
+msgid "Çıkış Yap"
+msgstr "Logout"
+
+msgid "Hemen Başvur"
+msgstr "Sign Up Now"
+
+msgid "Giriş Yap"
+msgstr "Login"
+
+msgid "Hoş Geldiniz, {}!"
+msgstr "Welcome, {}!"
+
+msgid "Analiz modelinizi seçin ve işlemlere başlayın"
+msgstr "Select your analysis model and get started"
+
+msgid "Kemik Kırığı Analizi"
+msgstr "Bone Fracture Analysis"
+
+msgid "Röntgen görüntülerinden kemik kırıklarını tespit eder."
+msgstr "Detects bone fractures from X-ray images."
+
+msgid "Analiz Et (Kemik)"
+msgstr "Analyze (Bone)"
+
+msgid "Göz Hastalığı Tespiti"
+msgstr "Eye Disease Detection"
+
+msgid "Diyabetik retinopati, katarakt ve glokom tespiti."
+msgstr "Detects diabetic retinopathy, cataract, and glaucoma."
+
+msgid "Analiz Et (Göz)"
+msgstr "Analyze (Eye)"
+
+msgid "Zatüre Tespiti"
+msgstr "Pneumonia Detection"
+
+msgid "Göğüs röntgenlerinden zatüre (pneumonia) tespiti."
+msgstr "Detects pneumonia from chest X-rays."
+
+msgid "Analiz Et (Akciğer)"
+msgstr "Analyze (Lung)"
+
+msgid "Toplu Analiz"
+msgstr "Batch Analysis"
+
+msgid "Son Analizleriniz"
+msgstr "Your Recent Analyses"
+
+msgid "Tüm Geçmişi Gör"
+msgstr "View All History"
+
+msgid "Bilgi:"
+msgstr "Info:"
+
+msgid "Tek seferde maksimum {} görüntü yükleyebilirsiniz."
+msgstr "You can upload a maximum of {} images at once."
+
+msgid "Görsel Dosyalarını Seçin:"
+msgstr "Select Image Files:"
+
+msgid "Desteklenen formatlar: JPG, JPEG, PNG (Maksimum {} dosya)"
+msgstr "Supported formats: JPG, JPEG, PNG (Maximum {} files)"
+
+msgid "Seçilen Görüntüler:"
+msgstr "Selected Images:"
+
+msgid "İşlem Durumu:"
+msgstr "Process Status:"
+
+msgid "Hazırlanıyor..."
+msgstr "Preparing..."
+
+msgid "Toplu Analiz Başlat"
+msgstr "Start Batch Analysis"
+
+msgid "İptal"
+msgstr "Cancel"
+
+msgid "Lütfen giriş yapın"
+msgstr "Please login"
+
+msgid "Bu sayfaya erişim yetkiniz yok"
+msgstr "You don't have access to this page"
+
+msgid "Geçersiz model tipi"
+msgstr "Invalid model type"
+
+msgid "Kendi hesabınızı silemezsiniz"
+msgstr "You cannot delete your own account"
+
+msgid "Kullanıcı başarıyla silindi"
+msgstr "User deleted successfully"
+
+msgid "Kullanıcı silinirken hata oluştu: {}"
+msgstr "Error deleting user: {}"
+
+msgid "Bu sonuçlara erişim yetkiniz yok"
+msgstr "You don't have access to these results"
+
+msgid "Hoş geldiniz, {} {}!"
+msgstr "Welcome, {} {}!"

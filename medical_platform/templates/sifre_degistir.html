@@ -1,0 +1,90 @@
+﻿{% extends "ana_taslak.html" %}
+
+{% block content %}
+<div class="container fade-in">
+    <div class="glass-card" style="max-width: 600px; margin: 2rem auto;">
+        <h1 style="margin-bottom: 2rem; text-align: center;">
+            <i class="fas fa-key"></i> Şifre Değiştir
+        </h1>
+
+        <form method="POST" action="{{ url_for('change_password') }}">
+            <div class="form-group">
+                <label for="old_password" class="form-label">
+                    <i class="fas fa-lock"></i> Mevcut Şifre
+                </label>
+                <input type="password" class="form-control" id="old_password" name="old_password"
+                    placeholder="Mevcut sifrenizi girin" required autocomplete="current-password">
+            </div>
+
+            <div class="form-group">
+                <label for="new_password" class="form-label">
+                    <i class="fas fa-lock"></i> Yeni Şifre
+                </label>
+                <input type="password" class="form-control" id="new_password" name="new_password"
+                    placeholder="Yeni sifrenizi girin (En az 6 karakter)" required minlength="6"
+                    autocomplete="new-password">
+                <small style="color: rgba(255, 255, 255, 0.6); font-size: 0.85rem;">
+                    En az 6 karakter olmalıdır
+                </small>
+            </div>
+
+            <div class="form-group">
+                <label for="new_password_confirm" class="form-label">
+                    <i class="fas fa-lock"></i> Yeni Şifre (Tekrar)
+                </label>
+                <input type="password" class="form-control" id="new_password_confirm" name="new_password_confirm"
+                    placeholder="Yeni sifrenizi tekrar girin" required minlength="6" autocomplete="new-password">
+            </div>
+
+            <div
+                style="background: rgba(59, 130, 246, 0.1); border-left: 4px solid var(--info-color); border-radius: 10px; padding: 1rem; margin-bottom: 1.5rem;">
+                <p style="margin: 0; color: #DBEAFE; font-size: 0.9rem;">
+                    <i class="fas fa-info-circle"></i>
+                    <strong>İpucu:</strong> Güvenli bir şifre için harf,rakam ve özel karakterler kullanın.
+                </p>
+            </div>
+
+            <div style="display: flex; gap: 1rem;">
+                <button type="submit" class="btn btn-primary" style="flex: 1;">
+                    <i class="fas fa-save"></i> Şifremi Değiştir
+                </button>
+                <a href="{{ url_for('profile') }}" class="btn btn-outline" style="flex: 1;">
+                    <i class="fas fa-times"></i> İptal
+                </a>
+            </div>
+        </form>
+
+        <div style="margin-top: 2rem; text-align: center;">
+            <a href="{{ url_for('dashboard') }}" style="color: rgba(255, 255, 255, 0.6); font-size: 0.9rem;">
+                <i class="fas fa-arrow-left"></i> Dashboarda Don
+            </a>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Sifre eslesmesi kontrolu
+    document.addEventListener('DOMContentLoaded', function () {
+        const newPassword = document.getElementById('new_password');
+        const newPasswordConfirm = document.getElementById('new_password_confirm');
+
+        if (newPassword && newPasswordConfirm) {
+            newPasswordConfirm.addEventListener('input', function () {
+                if (this.value && this.value !== newPassword.value) {
+                    this.setCustomValidity('Sifreler eslesmiyor');
+                } else {
+                    this.setCustomValidity('');
+                }
+            });
+
+            newPassword.addEventListener('input', function () {
+                if (newPasswordConfirm.value && newPasswordConfirm.value !== this.value) {
+                    newPasswordConfirm.setCustomValidity('Sifreler eslesmiyor');
+                } else {
+                    newPasswordConfirm.setCustomValidity('');
+                }
+            });
+        }
+    });
+</script>
+{% endblock %}

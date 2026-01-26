@@ -1,0 +1,140 @@
+# Turkish translations for PROJECT.
+# Copyright (C) 2026 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2026-01-23 14:00+0300\n"
+"PO-Revision-Date: 2026-01-23 14:00+0300\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: tr\n"
+"Language-Team: tr <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.16.0\n"
+
+#: Navbar
+msgid "Profilim"
+msgstr "Profilim"
+
+msgid "Şifre Değiştir"
+msgstr "Şifre Değiştir"
+
+msgid "Hesabı Sil"
+msgstr "Hesabı Sil"
+
+msgid "Çıkış Yap"
+msgstr "Çıkış Yap"
+
+msgid "Hemen Başvur"
+msgstr "Hemen Başvur"
+
+msgid "Giriş Yap"
+msgstr "Giriş Yap"
+
+msgid "Lütfen giriş yapın"
+msgstr "Lütfen giriş yapın"
+
+msgid "Bu sayfaya erişim yetkiniz yok"
+msgstr "Bu sayfaya erişim yetkiniz yok"
+
+#: Dashboard
+msgid "Hoş Geldiniz, {}!"
+msgstr "Hoş Geldiniz, {}!"
+
+msgid "Analiz modelinizi seçin ve işlemlere başlayın"
+msgstr "Analiz modelinizi seçin ve işlemlere başlayın"
+
+msgid "Kemik Kırığı Analizi"
+msgstr "Kemik Kırığı Analizi"
+
+msgid "Röntgen görüntülerinden kemik kırıklarını tespit eder."
+msgstr "Röntgen görüntülerinden kemik kırıklarını tespit eder."
+
+msgid "Analiz Et (Kemik)"
+msgstr "Analiz Et (Kemik)"
+
+msgid "Göz Hastalığı Tespiti"
+msgstr "Göz Hastalığı Tespiti"
+
+msgid "Diyabetik retinopati, katarakt ve glokom tespiti."
+msgstr "Diyabetik retinopati, katarakt ve glokom tespiti."
+
+msgid "Analiz Et (Göz)"
+msgstr "Analiz Et (Göz)"
+
+msgid "Zatüre Tespiti"
+msgstr "Zatüre Tespiti"
+
+msgid "Göğüs röntgenlerinden zatüre (pneumonia) tespiti."
+msgstr "Göğüs röntgenlerinden zatüre (pneumonia) tespiti."
+
+msgid "Analiz Et (Akciğer)"
+msgstr "Analiz Et (Akciğer)"
+
+msgid "Toplu Analiz"
+msgstr "Toplu Analiz"
+
+msgid "Son Analizleriniz"
+msgstr "Son Analizleriniz"
+
+msgid "Tüm Geçmişi Gör"
+msgstr "Tüm Geçmişi Gör"
+
+#: Batch Analysis
+msgid "Bilgi:"
+msgstr "Bilgi:"
+
+msgid "Tek seferde maksimum {} görüntü yükleyebilirsiniz."
+msgstr "Tek seferde maksimum {} görüntü yükleyebilirsiniz."
+
+msgid "Görsel Dosyalarını Seçin:"
+msgstr "Görsel Dosyalarını Seçin:"
+
+msgid "Desteklenen formatlar: JPG, JPEG, PNG (Maksimum {} dosya)"
+msgstr "Desteklenen formatlar: JPG, JPEG, PNG (Maksimum {} dosya)"
+
+msgid "Seçilen Görüntüler:"
+msgstr "Seçilen Görüntüler:"
+
+msgid "İşlem Durumu:"
+msgstr "İşlem Durumu:"
+
+msgid "Hazırlanıyor..."
+msgstr "Hazırlanıyor..."
+
+msgid "Toplu Analiz Başlat"
+msgstr "Toplu Analiz Başlat"
+
+msgid "İptal"
+msgstr "İptal"
+
+#: Messages
+msgid "Geçersiz model tipi"
+msgstr "Geçersiz model tipi"
+
+msgid "Dosya seçilmedi"
+msgstr "Dosya seçilmedi"
+
+msgid "Maksimum {} dosya yükleyebilirsiniz"
+msgstr "Maksimum {} dosya yükleyebilirsiniz"
+
+msgid "Kendi hesabınızı silemezsiniz"
+msgstr "Kendi hesabınızı silemezsiniz"
+
+msgid "Kullanıcı başarıyla silindi"
+msgstr "Kullanıcı başarıyla silindi"
+
+msgid "Kullanıcı silinirken hata oluştu: {}"
+msgstr "Kullanıcı silinirken hata oluştu: {}"
+
+msgid "Bu sonuçlara erişim yetkiniz yok"
+msgstr "Bu sonuçlara erişim yetkiniz yok"
+
+msgid "Hoş geldiniz, {} {}!"
+msgstr "Hoş geldiniz, {} {}!"

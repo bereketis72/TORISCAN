@@ -1,0 +1,197 @@
+{% extends "ana_taslak.html" %}
+
+{% block title %}{{ model_name }} - {{ _('Toplu Analiz') }}{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1 class="mb-4">
+        <i class="fas fa-layer-group"></i> {{ model_name }} - {{ _('Toplu Analiz') }}
+    </h1>
+
+    <div class="alert alert-info">
+        <i class="fas fa-info-circle"></i>
+        <strong>{{ _('Bilgi:') }}</strong> {{ _('Tek seferde maksimum {} görüntü
+        yükleyebilirsiniz.').format(max_batch_size) }}
+    </div>
+
+    <div class="card">
+        <div class="card-body">
+            <form id="batchForm" enctype="multipart/form-data">
+                <div class="mb-3">
+                    <label for="batch_files" class="form-label">
+                        {{ _('Görsel Dosyalarını Seçin:') }}
+                        <span id="fileCountBadge" class="badge bg-success ms-2" style="display: none;">0 dosya
+                            seçildi</span>
+                    </label>
+                    <input class="form-control" type="file" id="batch_files" name="batch_files"
+                        accept="image/png, image/jpeg, image/jpg" multiple>
+                    <div class="form-text">
+                        {{ _('Desteklenen formatlar: JPG, JPEG, PNG (Maksimum {} dosya)').format(max_batch_size) }}
+                    </div>
+                </div>
+
+                <!-- Önizleme Galerisi -->
+                <div id="previewGallery" class="row mb-3" style="display: none;">
+                    <h5>{{ _('Seçilen Görüntüler:') }}</h5>
+                    <div id="previewContainer" class="d-flex flex-wrap gap-2"></div>
+                </div>
+
+                <!-- Progress Bar -->
+                <div id="progressContainer" style="display: none;" class="mb-3">
+                    <label class="form-label">{{ _('İşlem Durumu:') }}</label>
+                    <div class="progress">
+                        <div id="progressBar" class="progress-bar progress-bar-striped progress-bar-animated"
+                            role="progressbar" style="width: 0%"></div>
+                    </div>
+                    <p id="progressText" class="text-center mt-2">{{ _('Hazırlanıyor...') }}</p>
+                </div>
+
+                <button type="submit" id="submitBtn" class="btn btn-primary btn-lg">
+                    <i class="fas fa-upload"></i> {{ _('Toplu Analiz Başlat') }}
+                </button>
+                <a href="{{ url_for('dashboard') }}" class="btn btn-secondary btn-lg">
+                    <i class="fas fa-arrow-left"></i> {{ _('İptal') }}
+                </a>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    const batchFilesInput = document.getElementById('batch_files');
+    const previewGallery = document.getElementById('previewGallery');
+    const previewContainer = document.getElementById('previewContainer');
+    const fileCountBadge = document.getElementById('fileCountBadge');
+    const batchForm = document.getElementById('batchForm');
+    const submitBtn = document.getElementById('submitBtn');
+    const progressContainer = document.getElementById('progressContainer');
+    const progressBar = document.getElementById('progressBar');
+    const progressText = document.getElementById('progressText');
+    const maxBatchSize = {{ max_batch_size }};
+
+    // Seçilen dosyaları saklamak için array
+    let selectedFiles = [];
+
+    // Dosya seçimi değiştiğinde önizleme göster
+    batchFilesInput.addEventListener('change', function (e) {
+        const newFiles = Array.from(e.target.files);
+
+        // Yeni dosyaları mevcut listeye ekle
+        newFiles.forEach(file => {
+            // Aynı isimde dosya varsa ekleme
+            if (!selectedFiles.some(f => f.name === file.name && f.size === file.size)) {
+                selectedFiles.push(file);
+            }
+        });
+
+        // Maximum kontrol
+        if (selectedFiles.length > maxBatchSize) {
+            alert(`Maksimum ${maxBatchSize} dosya yükleyebilirsiniz. İlk ${maxBatchSize} dosya seçildi.`);
+            selectedFiles = selectedFiles.slice(0, maxBatchSize);
+        }
+
+        // Önizlemeyi güncelle
+        updatePreview();
+
+        // Badge'i güncelle
+        updateFileCountBadge();
+
+        // Input'u temizle (tekrar seçim yapabilmek için)
+        batchFilesInput.value = '';
+    });
+
+
+    function updateFileCountBadge() {
+        if (selectedFiles.length > 0) {
+            fileCountBadge.textContent = `${selectedFiles.length} dosya seçildi`;
+            fileCountBadge.style.display = 'inline-block';
+        } else {
+            fileCountBadge.style.display = 'none';
+        }
+    }
+
+    function updatePreview() {
+        previewContainer.innerHTML = '';
+
+        if (selectedFiles.length > 0) {
+            previewGallery.style.display = 'block';
+
+            selectedFiles.forEach((file, index) => {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    const div = document.createElement('div');
+                    div.className = 'position-relative';
+                    div.style.width = '120px';
+                    div.style.marginRight = '10px';
+                    div.style.marginBottom = '10px';
+                    div.innerHTML = `
+                    <img src="${e.target.result}" class="img-thumbnail" style="width: 120px; height: 120px; object-fit: cover;">
+                    <span class="badge bg-primary position-absolute top-0 start-0 m-1">${index + 1}</span>
+                    <button type="button" class="btn btn-danger btn-sm position-absolute top-0 end-0 m-1" onclick="removeFile(${index})">
+                        <i class="fas fa-times"></i>
+                    </button>
+                `;
+                    previewContainer.appendChild(div);
+                };
+                reader.readAsDataURL(file);
+            });
+        } else {
+            previewGallery.style.display = 'none';
+        }
+    }
+
+    function removeFile(index) {
+        selectedFiles.splice(index, 1);
+        updatePreview();
+        updateFileCountBadge();
+    }
+
+    // Form gönderimi
+    batchForm.addEventListener('submit', async function (e) {
+        e.preventDefault();
+
+        if (selectedFiles.length === 0) {
+            alert('Lütfen bir veya daha fazla dosya seçin.');
+            // Focus file input
+            batchFilesInput.click();
+            return;
+        }
+
+        const formData = new FormData();
+        selectedFiles.forEach(file => {
+            formData.append('batch_files', file);
+        });
+
+        // UI güncellemeleri
+        submitBtn.disabled = true;
+        batchFilesInput.disabled = true;
+        progressContainer.style.display = 'block';
+
+        try {
+            const response = await fetch('{{ url_for("batch_analyze_process", model_type=model_type) }}', {
+                method: 'POST',
+                body: formData
+            });
+
+            const result = await response.json();
+
+            if (result.success) {
+                progressBar.style.width = '100%';
+                progressBar.classList.remove('progress-bar-animated');
+                progressText.textContent = 'Tamamlandı! Sonuçlar sayfasına yönlendiriliyorsunuz...';
+
+                setTimeout(() => {
+                    window.location.href = `/batch/result/${result.batch_id}`;
+                }, 1500);
+            } else {
+                throw new Error(result.error || 'Bilinmeyen hata');
+            }
+        } catch (error) {
+            alert('Hata: ' + error.message);
+            submitBtn.disabled = false;
+            batchFilesInput.disabled = false;
+            progressContainer.style.display = 'none';
+        }
+    });
+</script>
+{% endblock %}

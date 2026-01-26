@@ -1,0 +1,85 @@
+﻿{% extends "ana_taslak.html" %}
+
+{% block content %}
+<div class="container fade-in">
+    <div class="glass-card">
+        <h1 style="margin-bottom: 2rem;">
+            <i class="fas fa-user-circle"></i> Profilim
+        </h1>
+
+        <div style="margin-bottom: 2rem;">
+            <p><strong>TC Kimlik:</strong> {{ user.tc_kimlik }}</p>
+            <p style="color: rgba(255, 255, 255, 0.6); font-size: 0.9rem;">
+                <i class="fas fa-info-circle"></i> TC Kimlik numarası değiştirilemez
+            </p>
+        </div>
+
+        <form method="POST" action="{{ url_for('profile_update') }}">
+            <div class="form-group">
+                <label for="ad" class="form-label">
+                    <i class="fas fa-user"></i> Ad
+                </label>
+                <input type="text" class="form-control" id="ad" name="ad" value="{{ user.ad }}" required>
+            </div>
+
+            <div class="form-group">
+                <label for="soyad" class="form-label">
+                    <i class="fas fa-user"></i> Soyad
+                </label>
+                <input type="text" class="form-control" id="soyad" name="soyad" value="{{ user.soyad }}" required>
+            </div>
+
+            <div class="form-group">
+                <label for="telefon" class="form-label">
+                    <i class="fas fa-phone"></i> Telefon
+                </label>
+                <input type="tel" class="form-control" id="telefon" name="telefon" value="{{ user.telefon }}"
+                    placeholder="05XXXXXXXXX" required>
+            </div>
+
+            <div style="display: flex; gap: 1rem; margin-top: 2rem;">
+                <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-save"></i> Değişiklikleri Kaydet
+                </button>
+                <a href="{{ url_for('dashboard') }}" class="btn btn-outline">
+                    <i class="fas fa-times"></i> İptal
+                </a>
+            </div>
+        </form>
+    </div>
+
+    <div class="glass-card" style="margin-top: 2rem;">
+        <h2 style="margin-bottom: 1rem;">
+            <i class="fas fa-cog"></i> Hesap Ayarları
+        </h2>
+
+        <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+            <a href="{{ url_for('change_password') }}" class="btn btn-outline">
+                <i class="fas fa-key"></i> Şifremi Değiştir
+            </a>
+
+            <button onclick="confirmDeleteAccount(event)" class="btn btn-danger">
+                <i class="fas fa-trash"></i> Hesabımı Sil
+            </button>
+        </div>
+
+        <div
+            style="margin-top: 1.5rem; padding: 1rem; background: rgba(239, 68, 68, 0.1); border-left: 4px solid var(--danger-color); border-radius: 10px;">
+            <p style="margin: 0; color: #FEE2E2; font-size: 0.9rem;">
+                <i class="fas fa-exclamation-triangle"></i>
+                <strong>UYARI:</strong> Hesabınızı silerseniz tüm analizleriniz kalıcı olarak silinecektir. Bu işlem
+                geri alınamaz.
+            </p>
+        </div>
+    </div>
+
+    <div class="glass-card" style="margin-top: 2rem;">
+        <h2 style="margin-bottom: 1rem;">
+            <i class="fas fa-clock"></i> Hesap Bilgileri
+        </h2>
+
+        <p><strong>Kayıt Tarihi:</strong> {{ user.olusturma_tarihi|datetime_tr }}</p>
+        <p><strong>Toplam Analiz:</strong> {{ user.analyses|length if user.analyses else 0 }}</p>
+    </div>
+</div>
+{% endblock %}
