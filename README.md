@@ -48,7 +48,7 @@
   <img src="https://github.com/user-attachments/assets/b32c1de5-2c8d-4f91-898b-e97e691fd6b8" width="49%" />
 </p>
 
-### PDF Yazdırma 
+### PDF Yazdirma 
 <p align="center">
   <img src="https://github.com/user-attachments/assets/1b4a87a3-2700-4635-acc7-acc020923788" width="49%" />
   
