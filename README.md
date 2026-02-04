@@ -24,7 +24,8 @@
 <p align="center">
   <img src="https://github.com/user-attachments/assets/5bb2676a-032d-47f0-97f0-cd08ef3cd094" width="49%" />
 </p>
-### Giriş Yap
+
+### Giriş Yap 
 <p align="center">
   <img src="https://github.com/user-attachments/assets/12c5d268-833c-4a7e-a601-6016ab9106fb" width="49%" />
 </p>
@@ -40,15 +41,13 @@
     <img src="https://github.com/user-attachments/assets/1ddb5437-48ee-4a77-baea-92c19a185720" width="32.8%" />
 </p>
 
-
-
 ### Tek Görüntü Yükleme & Analiz Sonucu
 <p align="center">
   <img src="https://github.com/user-attachments/assets/8bd7e73c-87b9-4a8f-928e-3f31861750ff" width="49%" />
   <img src="https://github.com/user-attachments/assets/b32c1de5-2c8d-4f91-898b-e97e691fd6b8" width="49%" />
 </p>
 
-### PDF Yazdırma & 
+### PDF Yazdırma 
 <p align="center">
   <img src="https://github.com/user-attachments/assets/1b4a87a3-2700-4635-acc7-acc020923788" width="49%" />
   
