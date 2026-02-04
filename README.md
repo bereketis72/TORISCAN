@@ -200,7 +200,7 @@ TORISCAN/                     # Ana proje klasörü
 
 ## Ana Python Dosyaları
 
-### 1. `uygulama.py` (695 satır) **ANA KALP**
+### 1. `uygulama.py`  **ANA KALP**
 
 **Ne yapar:**
 - Flask uygulamasının ana giriş noktası
@@ -225,7 +225,7 @@ python uygulama.py
 # Tarayıcı otomatik açılır: http://localhost:5000
 ```
 
-### 2. `ayarlar.py` (48 satır)  **KONFİGÜRASYON**
+### 2. `ayarlar.py` **KONFİGÜRASYON**
 
 **Ne yapar:**
 - Tüm uygulama ayarlarını tek yerden yönetir
@@ -308,7 +308,7 @@ class BatchAnalysis(db.Model):
     tamamlanan_dosya = db.Column(db.Integer)
 ```
 
-### 4. `yapay_zeka_modelleri.py` (193 satır) **AI MANAGER**
+### 4. `yapay_zeka_modelleri.py`  **AI MANAGER**
 
 **Ne yapar:**
 - 3 AI modelini yükler ve yönetir
@@ -347,7 +347,7 @@ class AIModelManager:
         # Genel tahmin fonksiyonu
 ```
 
-### 5. `cevirileri_derle.py` (78 satır) **ÇEVİRİ DERLEYİCİ**
+### 5. `cevirileri_derle.py` **ÇEVİRİ DERLEYİCİ**
 
 **Ne yapar:**
 - `.po` (text) dosyalarını `.mo` (binary) formatına çevirir
@@ -393,7 +393,7 @@ messages.po (metin) → compile_translations.py → messages.mo (binary)
 - `toplu_analizler` - Batch analiz kayıtları
 - VIEW: `KullanicilarGizli` - Şifreler maskelenmiş
 
-### 2. `migrate.py` (108 satır) **VERİTABANI MİGRATION**
+### 2. `migrate.py` **VERİTABANI MİGRATION**
 
 **Ne yapar:**
 - Mevcut veritabanını güncellemeden yeni özellikler ekler
@@ -554,7 +554,7 @@ Dosya Seç → Önizle → Analiz Başlat → AI İşle → Sonuç Göster
 - Multiple dosya seçimi (max 10)
 - Dosya sayısı badge 
 - Önizleme galerisi (thumbnail'lar)
-- Her dosya için ❌ kaldırma butonu
+- Her dosya için kaldırma butonu
 - Progress bar
 
 **JavaScript:**
