@@ -20,9 +20,12 @@
   <img src="https://github.com/user-attachments/assets/81e156d6-b42b-4a9e-8217-98d89b23ed1e" width="49%" />
 </p>
 
-### Kayıt Ol & Giriş Yap
+### Kayıt Ol 
 <p align="center">
   <img src="https://github.com/user-attachments/assets/5bb2676a-032d-47f0-97f0-cd08ef3cd094" width="49%" />
+</p>
+### Giriş Yap
+<p align="center">
   <img src="https://github.com/user-attachments/assets/12c5d268-833c-4a7e-a601-6016ab9106fb" width="49%" />
 </p>
 
@@ -30,8 +33,14 @@
 <p align="center">
   <img src="https://github.com/user-attachments/assets/350f3354-9427-42a1-a7ad-4231d462941b" width="32.8%" />
   <img src="https://github.com/user-attachments/assets/afc6236d-f80d-4b6d-ae47-e90359c0ed9e" width="32.8%" />
-  <img src="https://github.com/user-attachments/assets/1ddb5437-48ee-4a77-baea-92c19a185720" width="32.8%" />
 </p>
+
+### Kullanıcı Ayarları
+<p align="center">
+    <img src="https://github.com/user-attachments/assets/1ddb5437-48ee-4a77-baea-92c19a185720" width="32.8%" />
+</p>
+
+
 
 ### Tek Görüntü Yükleme & Analiz Sonucu
 <p align="center">
@@ -39,26 +48,25 @@
   <img src="https://github.com/user-attachments/assets/b32c1de5-2c8d-4f91-898b-e97e691fd6b8" width="49%" />
 </p>
 
-### PDF Yazdırma & Toplu Yükleme
+### PDF Yazdırma & 
 <p align="center">
   <img src="https://github.com/user-attachments/assets/1b4a87a3-2700-4635-acc7-acc020923788" width="49%" />
-  <img src="https://github.com/user-attachments/assets/18116b18-606c-43e6-894c-a6a397556752" width="49%" />
+  
 </p>
 
-### Toplu Analiz Sonucu & Admin Paneli
+### Toplu Yükleme
 <p align="center">
+  <img src="https://github.com/user-attachments/assets/18116b18-606c-43e6-894c-a6a397556752" width="49%" />
   <img src="https://github.com/user-attachments/assets/fc0f3c48-872f-4cc0-b6ab-5cd131cfb742" width="49%" />
-  <img src="https://github.com/user-attachments/assets/ba8df31c-ed72-4831-a2d5-7e75e4b68bc0" width="49%" />
 </p>
+
 
 ### Admin Kontrol Paneli Detay
 <p align="center">
+
+  <img src="https://github.com/user-attachments/assets/ba8df31c-ed72-4831-a2d5-7e75e4b68bc0" width="49%" />
   <img src="https://github.com/user-attachments/assets/e9ec9b79-bdf3-4a8e-a84c-51e35fc51bef" width="99%" />
 </p>
-
-
-
-
 
 
 ## Proje Genel Bakış
