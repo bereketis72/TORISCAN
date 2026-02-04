@@ -36,7 +36,8 @@
   <img src="https://github.com/user-attachments/assets/afc6236d-f80d-4b6d-ae47-e90359c0ed9e" width="32.8%" />
 </p>
 
-### Kullanıcı Ayarları
+### Kullanici Ayarlari
+
 <p align="center">
     <img src="https://github.com/user-attachments/assets/1ddb5437-48ee-4a77-baea-92c19a185720" width="32.8%" />
 </p>
