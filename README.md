@@ -54,7 +54,7 @@
   
 </p>
 
-### Toplu Yükleme
+### Toplu Yukleme
 <p align="center">
   <img src="https://github.com/user-attachments/assets/18116b18-606c-43e6-894c-a6a397556752" width="49%" />
   <img src="https://github.com/user-attachments/assets/fc0f3c48-872f-4cc0-b6ab-5cd131cfb742" width="49%" />
