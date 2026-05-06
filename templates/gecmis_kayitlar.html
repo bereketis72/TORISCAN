@@ -1,0 +1,79 @@
+﻿{% extends "ana_taslak.html" %}
+
+{% block content %}
+<div class="container fade-in">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+        <h1>Analiz Geçmişi</h1>
+        <a href="{{ url_for('dashboard') }}" class="btn btn-outline btn-sm">
+            <i class="fas fa-arrow-left"></i> Panele Dön
+        </a>
+    </div>
+
+    <div class="glass-card table-responsive">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Tarih</th>
+                    <th>Model Tipi</th>
+                    <th>Dosya</th>
+                    <th>Tanı Sonucu</th>
+                    <th>Güven Skoru</th>
+                    <th>İşlem</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for analysis in analyses %}
+                <tr>
+                    <td>{{ analysis.olusturma_tarihi.strftime('%d.%m.%Y %H:%M') }}</td>
+                    <td>
+                        {% if analysis.model_tipi == 'bone' %}
+                        <span class="badge badge-info"><i class="fas fa-bone"></i> Kemik</span>
+                        {% elif analysis.model_tipi == 'eye' %}
+                        <span class="badge badge-warning"><i class="fas fa-eye"></i> Göz</span>
+                        {% else %}
+                        <span class="badge badge-success"><i class="fas fa-lungs"></i> Akciğer</span>
+                        {% endif %}
+                    </td>
+                    <td>
+                        <span style="font-size: 0.8rem; opacity: 0.7;">
+                            {{ analysis.gorsel_dosya_adi.split('_')[-1] }}
+                        </span>
+                    </td>
+                    <td style="font-weight: 500;">
+                        {{ analysis.tani_sonucu }}
+                    </td>
+                    <td>
+                        <div style="display: flex; align-items: center; gap: 0.5rem;">
+                            <div
+                                style="width: 50px; background: rgba(255,255,255,0.1); height: 4px; border-radius: 2px;">
+                                <div
+                                    style="width: {{ analysis.guven_orani }}%; background: var(--primary-color); height: 100%; border-radius: 2px;">
+                                </div>
+                            </div>
+                            %{{ "%.0f"|format(analysis.guven_orani) }}
+                        </div>
+                    </td>
+                    <td>
+                        <a href="{{ url_for('result', analysis_id=analysis.id) }}" class="btn btn-sm btn-outline">
+                            <i class="fas fa-search"></i> İncele
+                        </a>
+                    </td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="6" style="text-align: center; padding: 3rem;">
+                        <div style="opacity: 0.5; margin-bottom: 1rem;">
+                            <i class="fas fa-history" style="font-size: 3rem;"></i>
+                        </div>
+                        <p>Henüz hiç analiz kaydınız bulunmuyor.</p>
+                        <a href="{{ url_for('dashboard') }}" class="btn btn-primary btn-sm" style="margin-top: 1rem;">
+                            İlk Analizini Yap
+                        </a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

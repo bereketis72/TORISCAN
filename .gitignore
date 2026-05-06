@@ -1,0 +1,17 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+vins/
+venv/
+ENV/
+
+# Flask
+instance/
+.webassets-cache
+
+# Sensitive data
+.env
+
+# VS Code
+.vscode/

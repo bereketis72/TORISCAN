@@ -1,0 +1,123 @@
+﻿{% extends "ana_taslak.html" %}
+
+{% block content %}
+<div class="container fade-in">
+    <div style="margin-bottom: 2rem;">
+        <a href="{{ url_for('dashboard') }}" class="btn btn-outline btn-sm">
+            <i class="fas fa-arrow-left"></i> Panele Dön
+        </a>
+    </div>
+
+    <div class="glass-card" style="max-width: 800px; margin: 0 auto; padding: 2rem;">
+        <div style="text-align: center; margin-bottom: 3rem;">
+            <h1 style="font-size: 2rem;">{{ model_name }}</h1>
+            <p style="opacity: 0.8;">Lütfen analiz edilecek röntgen görüntüsünü yükleyin</p>
+        </div>
+
+        <form action="{{ url_for('analyze', model_type=model_type) }}" method="POST" enctype="multipart/form-data"
+            id="uploadForm">
+            <div class="upload-area" id="dropZone">
+                <i class="fas fa-cloud-upload-alt upload-icon"></i>
+                <h3>Dosyayı sürükleyin veya seçin </h3>
+                <p>JPG, JPEG veya PNG (Max 16MB)</p>
+                <input type="file" name="xray_image" id="fileInput" accept=".png, .jpg, .jpeg" style="display: none;"
+                    required>
+                <button type="button" class="btn btn-primary" onclick="document.getElementById('fileInput').click()">
+                    Dosya Seç
+                </button>
+                <div id="previewContainer" style="display: none; margin-top: 1rem;">
+                    <p id="fileName" style="margin-bottom: 0.5rem;"></p>
+                    <img id="imagePreview" src="#" alt="Preview" style="max-height: 200px; border-radius: 10px;">
+                </div>
+            </div>
+
+            <div style="margin-top: 2rem; text-align: center;">
+                <button type="submit" class="btn btn-primary btn-lg btn-block" id="submitBtn">
+                    <i class="fas fa-microscope"></i> Analiz Et
+                </button>
+                <div id="loading" style="display: none; margin-top: 1rem;">
+                    <i class="fas fa-spinner fa-spin"></i> Analiz yapılıyor, lütfen bekleyin...
+                </div>
+            </div>
+        </form>
+
+        <div class="alert alert-info" style="margin-top: 2rem;">
+            <strong>Bilgi:</strong> Yüklenen görüntüler sadece analiz amacıyla kullanılır ve güvenli bir şekilde
+            saklanır.
+        </div>
+    </div>
+</div>
+
+<script>
+    // File upload preview scripts
+    const dropZone = document.getElementById('dropZone');
+    const fileInput = document.getElementById('fileInput');
+    const previewContainer = document.getElementById('previewContainer');
+    const imagePreview = document.getElementById('imagePreview');
+    const fileName = document.getElementById('fileName');
+    const uploadForm = document.getElementById('uploadForm');
+    const submitBtn = document.getElementById('submitBtn');
+    const loading = document.getElementById('loading');
+
+    // Drag and drop events
+    ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+        dropZone.addEventListener(eventName, preventDefaults, false);
+    });
+
+    function preventDefaults(e) {
+        e.preventDefault();
+        e.stopPropagation();
+    }
+
+    ['dragenter', 'dragover'].forEach(eventName => {
+        dropZone.addEventListener(eventName, highlight, false);
+    });
+
+    ['dragleave', 'drop'].forEach(eventName => {
+        dropZone.addEventListener(eventName, unhighlight, false);
+    });
+
+    function highlight(e) {
+        dropZone.style.borderColor = 'var(--primary-color)';
+        dropZone.style.background = 'rgba(255,255,255,0.1)';
+    }
+
+    function unhighlight(e) {
+        dropZone.style.borderColor = 'rgba(255,255,255,0.3)';
+        dropZone.style.background = 'transparent';
+    }
+
+    dropZone.addEventListener('drop', handleDrop, false);
+
+    function handleDrop(e) {
+        const dt = e.dataTransfer;
+        const files = dt.files;
+        fileInput.files = files;
+        handleFiles(files);
+    }
+
+    fileInput.addEventListener('change', function () {
+        handleFiles(this.files);
+    });
+
+    function handleFiles(files) {
+        if (files.length > 0) {
+            const file = files[0];
+            fileName.textContent = file.name;
+
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                imagePreview.src = e.target.result;
+                previewContainer.style.display = 'block';
+            }
+            reader.readAsDataURL(file);
+        }
+    }
+
+    uploadForm.addEventListener('submit', function () {
+        submitBtn.disabled = true;
+        submitBtn.style.opacity = '0.7';
+        loading.style.display = 'block';
+    });
+</script>
+{% endblock %}

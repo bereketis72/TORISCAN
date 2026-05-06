@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TORISCAN Platform</title>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar glass-effect">
+        <div class="container navbar-container">
+            <a href="{{ url_for('index') }}" class="navbar-brand fade-in"
+                style="display: flex; flex-direction: column; align-items: center; line-height: 1;">
+                <img src="{{ url_for('static', filename='images/toriscan_logo.png') }}" alt="TORISCAN Logo"
+                    style="height: 55px; width: auto; border-radius: 12px; border: 2px solid white; box-shadow: 0 0 10px rgba(0, 242, 254, 0.5);">
+                <span
+                    style="font-size: 0.9rem; font-weight: 700; color: white; margin-top: 5px; letter-spacing: 1px;">TORISCAN</span>
+            </a>
+
+            <ul class="navbar-nav fade-in">
+                {% if session.user_id %}
+                <!-- Admin Link (sadece admin kullanıcılar için) -->
+                {% if session.is_admin %}
+                <li>
+                    <a href="{{ url_for('admin_panel') }}" class="btn btn-danger btn-sm" style="margin-right: 0.5rem;">
+                        <i class="fas fa-user-shield"></i> Admin Panel
+                    </a>
+                </li>
+                {% endif %}
+
+                <!-- Profil Dropdown Menusu -->
+                <li class="profile-dropdown">
+                    <button class="profile-btn" id="profileDropdownBtn">
+                        <i class="fas fa-user-circle"></i>
+                        <span>{{ session.user_name }}</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="profile-dropdown-menu" id="profileDropdownMenu">
+                        <a href="{{ url_for('profile') }}" class="dropdown-item">
+                            <i class="fas fa-user"></i> {{ _('Profilim') }}
+                        </a>
+                        <a href="{{ url_for('change_password') }}" class="dropdown-item">
+                            <i class="fas fa-key"></i> {{ _('Şifre Değiştir') }}
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a href="#" class="dropdown-item text-danger" onclick="confirmDeleteAccount(event)">
+                            <i class="fas fa-trash"></i> {{ _('Hesabı Sil') }}
+                        </a>
+                        <a href="{{ url_for('logout') }}" class="dropdown-item">
+                            <i class="fas fa-sign-out-alt"></i> {{ _('Çıkış Yap') }}
+                        </a>
+                    </div>
+                </li>
+                {% else %}
+                <!-- Giris ve Kayit sayfalarinda butonlari gizle -->
+                {% if request.endpoint != 'login' and request.endpoint != 'register' %}
+                <li>
+                    <a href="{{ url_for('register') }}" class="btn btn-primary btn-sm fade-in"
+                        style="margin-right: 0.5rem;">
+                        {{ _('Hemen Başvur') }}
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ url_for('login') }}" class="btn btn-outline btn-sm fade-in">
+                        {{ _('Giriş Yap') }}
+                    </a>
+                </li>
+                {% endif %}
+                {% endif %}
+
+
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Flash Messages -->
+    <div class="container flash-messages">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        {% for category, message in messages %}
+        <div class="alert alert-{{ category }} fade-in">
+            {{ message }}
+        </div>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+    </div>
+
+    <!-- Main Content -->
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Footer -->
+    <footer class="glass-effect">
+        <div class="container footer-content" style="text-align: center;">
+
+            <p style="
+                margin-top: 15px; 
+                font-size: 1.05em; 
+                background: rgba(15, 15, 35, 0.95) !important;
+                border: 3px solid #fbbf24 !important;
+                border-radius: 12px !important;
+                padding: 1.2rem 1.8rem !important;
+                color: #fde047 !important;
+                font-weight: 700 !important;
+                line-height: 1.7 !important;
+                text-shadow: 0 2px 8px rgba(0, 0, 0, 0.9) !important;
+                box-shadow: 0 8px 30px rgba(251, 191, 36, 0.4) !important;
+                max-width: 90% !important;
+                margin-left: auto !important;
+                margin-right: auto !important;
+            ">
+                <strong style="
+                    color: #fcd34d !important;
+                    font-size: 1.3em !important;
+                    text-transform: uppercase !important;
+                    letter-spacing: 2px !important;
+                    text-shadow: 0 0 15px rgba(252, 211, 77, 0.8) !important;
+                ">⚠️ UYARI:</strong> Bu uygulama yalnızca eğitim ve proje geliştirme amaçlıdır. Sunulan bilgiler
+                tıbbi tavsiye niteliği taşımaz. Sağlık sorunlarınız için lütfen en kısa sürede bir sağlık kuruluşuna
+                veya uzman doktora danışınız.
+            </p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    <script>
+        // Dil dropdown için JavaScript
+        const langDropdownBtn = document.getElementById('langDropdownBtn');
+        const langDropdownMenu = document.getElementById('langDropdownMenu');
+
+        if (langDropdownBtn && langDropdownMenu) {
+            langDropdownBtn.addEventListener('click', function (e) {
+                e.stopPropagation();
+                langDropdownMenu.classList.toggle('active');
+            });
+
+            document.addEventListener('click', function () {
+                langDropdownMenu.classList.remove('active');
+            });
+        }
+    </script>
+</body>
+
+</html>

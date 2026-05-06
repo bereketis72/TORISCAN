@@ -1,0 +1,106 @@
+﻿{% extends "ana_taslak.html" %}
+
+{% block content %}
+<div class="container fade-in">
+    <div style="margin-bottom: 2rem;">
+        <a href="{{ url_for('dashboard') }}" class="btn btn-outline btn-sm">
+            <i class="fas fa-arrow-left"></i> Panele Dön
+        </a>
+    </div>
+
+    <div class="glass-card result-header {{ 'result-success' if not result_data.is_healthy else 'result-info' }}"
+        style="padding: 2rem; border-left: 5px solid {{ 'var(--danger-color)' if not result_data.is_healthy else 'var(--success-color)' }};">
+        <h1 style="margin-bottom: 0.5rem;">Analiz Sonucu</h1>
+        <h2
+            style="font-size: 2.5rem; color: {{ 'var(--danger-color)' if not result_data.is_healthy else 'var(--success-color)' }};">
+            {{ analysis.tani_sonucu }}
+        </h2>
+        <p style="font-size: 1.2rem; opacity: 0.8;">
+            Güven Skoru: <strong>%{{ "%.1f"|format(analysis.guven_orani) }}</strong>
+        </p>
+    </div>
+
+    <div class="grid grid-2" style="margin-top: 2rem;">
+        <div class="glass-card">
+            <h3>Analiz Edilen Görüntü</h3>
+            <div style="margin-top: 1rem; text-align: center;">
+                <img src="{{ url_for('static', filename='uploads/' + analysis.gorsel_dosya_adi) }}" alt="X-Ray"
+                    style="max-width: 100%; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+            </div>
+        </div>
+
+        <div class="glass-card">
+            <h3>Detaylı Bilgiler</h3>
+            <div style="margin-top: 1rem;">
+                <ul class="list-unstyled" style="line-height: 2;">
+                    <li><strong>Hasta:</strong> {{ session.user_name }}</li>
+                    <li><strong><i class="fas fa-calendar"></i> Tarih:</strong> {{ analysis.olusturma_tarihi|datetime_tr }}
+                    </li>
+                    <li><strong>Model:</strong>
+                        {% if analysis.model_tipi == 'bone' %}
+                        Kemik Kırığı Tespiti
+                        {% elif analysis.model_tipi == 'eye' %}
+                        Göz Hastalığı Tespiti
+                        {% else %}
+                        Zatüre Tespiti
+                        {% endif %}
+                    </li>
+                </ul>
+
+                {% if result_data.all_probabilities %}
+                <div style="margin-top: 2rem;">
+                    <h4>Olasılık Dağılımı :</h4>
+                    {% for class_name, prob in result_data.all_probabilities.items() %}
+                    <div style="margin-bottom: 0.5rem;">
+                        <div style="display: flex; justify-content: space-between; font-size: 0.9rem;">
+                            <span>{{ class_name }}</span>
+                            <span>%{{ "%.1f"|format(prob) }}</span>
+                        </div>
+                        <div style="width: 100%; background: rgba(255,255,255,0.1); height: 8px; border-radius: 4px;">
+                            <div
+                                style="width: {{ prob }}%; background: var(--primary-color); height: 100%; border-radius: 4px;">
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <div class="result-actions" style="margin-top: 2rem; text-align: center;">
+        <h3>Önerilen Aksiyonlar</h3>
+        <p style="margin-bottom: 2rem; opacity: 0.8;">
+            {% if not result_data.is_healthy %}
+            Tespit edilen bulgular nedeniyle lütfen en kısa sürede uzman bir doktora başvurun.
+            {% else %}
+            Herhangi bir bulguya rastlanmadı ancak şikayetleriniz devam ederse doktora başvurun.
+            {% endif %}
+        </p>
+
+        <div style="display: flex; gap: 1rem; justify-content: center;">
+            <a href="{{ url_for('analyze', model_type=analysis.model_tipi) }}" class="btn btn-primary">
+                Yeni Analiz Yap
+            </a>
+            <button onclick="window.print()" class="btn btn-outline">
+                <i class="fas fa-print"></i> Raporu Yazdır
+            </button>
+        </div>
+    </div>
+
+    <div class="print-only">
+        <p><strong>UYARI:</strong> Bu uygulama yalnızca eğitim ve proje geliştirme amaçlıdır. Sunulan bilgiler tıbbi
+            tavsiye niteliği taşımaz. Sağlık sorunlarınız için lütfen en kısa sürede bir sağlık kuruluşuna veya uzman
+            doktora danışınız.</p>
+        saglik kurulusuna basvurunuz.</p>
+        <p>Medikal Goruntu Analiz Platformu &copy; 2026</p>
+    </div>
+    <!-- Print Only Disclaimer -->
+    <div class="print-only">
+        <p><strong>UYARI:</strong> Bu uygulama yalnızca eğitim ve proje geliştirme amaçlıdır. Sunulan bilgiler tıbbi
+            tavsiye niteliği taşımaz. Sağlık sorunlarınız için lütfen en kısa sürede bir sağlık kuruluşuna veya uzman
+            doktora danışınız.</p>
+    </div>
+</div>
+{% endblock %}
